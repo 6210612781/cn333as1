@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
 
     var random: Int = nextInt(1,1000)
-
+    var count:Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -32,10 +32,9 @@ class MainActivity : AppCompatActivity() {
         ButtonCheck = findViewById(R.id.ButtonCheck)
         textView3 = findViewById(R.id.textView3)
         textView.text = "Enter your number"
-        var count:Int = 0
+
         textView3.text = "Wrong Counter : $count"
         ButtonCheck.setOnClickListener {
-            count = count + 1
             var number: Int = 0
 
             try {
@@ -46,38 +45,36 @@ class MainActivity : AppCompatActivity() {
             }
             if ((number <= 0) or (number > 1000)) {
                 textView.text = "Please input 1-1000!"
+                count += 1
+                textView3.text = "Wrong Counter : $count"
                 editText.text.clear()
-
             }  else if (number < random) {
-
                 textView.text = "Wrong, too low!"
-                editText.text.clear()
+                count += 1
                 textView3.text = "Wrong Counter : $count"
+                editText.text.clear()
             }  else if (number > random) {
-
                 textView.text = "Wrong, too high!"
-                editText.text.clear()
+                count += 1
                 textView3.text = "Wrong Counter : $count"
+                editText.text.clear()
             }  else {
-
                 textView.text = "OK, It's right!!"
-                editText.text.clear()
                 textView3.text = "Wrong Counter : $count"
+                editText.text.clear()
             }
-
+            var count:Int = count - count
         }
-
         ButtonReset.setOnClickListener {
             reset()
-            var count:Int = 0
-            textView3.text = "Wrong Counter : $count"
         }
 
     }
-
     fun reset() {
         random = nextInt(1, 1000)
         textView.text = "Enter your number"
+        count = 0
+        textView3.text = "Wrong Counter : $count"
         editText.text.clear()
 
     }
